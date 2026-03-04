@@ -13,7 +13,7 @@
 ```bash
 # 从 GitHub 安装（推荐）
 cd ~/your-project
-curl -sL https://raw.githubusercontent.com/YOUR_USERNAME/ai-collab-workflow/main/install.sh | bash
+curl -sL https://raw.githubusercontent.com/XuanjiLong/ai-collab-workflow/main/install.sh | bash
 
 # 或手动复制（如果已克隆到本地）
 cd ~/your-project
@@ -109,7 +109,7 @@ Multi-agent collaboration protocol: Main Agent orchestrates Coder and Reviewer t
 ```bash
 # Install from GitHub (recommended)
 cd ~/your-project
-curl -sL https://raw.githubusercontent.com/YOUR_USERNAME/ai-collab-workflow/main/install.sh | bash
+curl -sL https://raw.githubusercontent.com/XuanjiLong/ai-collab-workflow/main/install.sh | bash
 
 # Or manual copy (if cloned locally)
 cd ~/your-project

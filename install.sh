@@ -12,9 +12,9 @@ cd "$TARGET_DIR"
 
 # Download from GitHub
 if command -v curl &> /dev/null; then
-    curl -sL https://github.com/YOUR_USERNAME/ai-collab-workflow/archive/main.tar.gz | tar xz --strip-components=1 ai-collab-workflow-main/{docs,schemas,scripts,AGENTS.md}
+    curl -sL https://github.com/XuanjiLong/ai-collab-workflow/archive/main.tar.gz | tar xz --strip-components=1 ai-collab-workflow-main/{docs,schemas,scripts,AGENTS.md}
 elif command -v wget &> /dev/null; then
-    wget -qO- https://github.com/YOUR_USERNAME/ai-collab-workflow/archive/main.tar.gz | tar xz --strip-components=1 ai-collab-workflow-main/{docs,schemas,scripts,AGENTS.md}
+    wget -qO- https://github.com/XuanjiLong/ai-collab-workflow/archive/main.tar.gz | tar xz --strip-components=1 ai-collab-workflow-main/{docs,schemas,scripts,AGENTS.md}
 else
     echo "Error: curl or wget required"
     exit 1
