@@ -1,7 +1,7 @@
 #!/bin/bash
 # Install ai-collab-workflow into your project
 
-set -e
+set -euo pipefail
 
 TARGET_DIR="${1:-.workflow}"
 
@@ -12,7 +12,7 @@ cd "$TARGET_DIR"
 
 # Download from GitHub
 if command -v curl &> /dev/null; then
-    curl -sL https://github.com/XuanjiLong/ai-collab-workflow/archive/main.tar.gz | tar xz --strip-components=1 ai-collab-workflow-main/{docs,schemas,scripts,AGENTS.md}
+    curl -fsSL https://github.com/XuanjiLong/ai-collab-workflow/archive/main.tar.gz | tar xz --strip-components=1 ai-collab-workflow-main/{docs,schemas,scripts,AGENTS.md}
 elif command -v wget &> /dev/null; then
     wget -qO- https://github.com/XuanjiLong/ai-collab-workflow/archive/main.tar.gz | tar xz --strip-components=1 ai-collab-workflow-main/{docs,schemas,scripts,AGENTS.md}
 else

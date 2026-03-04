@@ -21,14 +21,15 @@ mkdir -p .workflow && cd .workflow
 cp -r ~/ai-collab-workflow/{docs,schemas,scripts,AGENTS.md} .
 
 # 在项目根目录的 CLAUDE.md 中加入
-echo “## 工作流协议
+cat >> CLAUDE.md << 'EOF'
+## 工作流协议
 
 当收到编码任务时，按 .workflow/AGENTS.md 协议执行：
 1. 阅读 .workflow/docs/prompts/main_agent.system.md
 2. 构建 TaskContract 并存入 .workflow/tasks/T-<id>/
 3. 按 RUNBOOK 循环：code → review → decision
 4. 使用 .workflow/docs/DISPATCH.md 的多会话模式调度 Coder/Reviewer
-“ >> CLAUDE.md
+EOF
 
 # 3. 开始使用
 # 在 Claude Code 或其他 AI CLI 中说：
@@ -117,13 +118,14 @@ mkdir -p .workflow && cd .workflow
 cp -r ~/ai-collab-workflow/{docs,schemas,scripts,AGENTS.md} .
 
 # Add to your project's CLAUDE.md
-echo "## Workflow Protocol
+cat >> CLAUDE.md << 'EOF'
+## Workflow Protocol
 When receiving coding tasks, follow .workflow/AGENTS.md protocol:
 1. Read .workflow/docs/prompts/main_agent.system.md
 2. Build TaskContract and save to .workflow/tasks/T-<id>/
 3. Loop: code → review → decision (see RUNBOOK)
 4. Use .workflow/docs/DISPATCH.md multi-session mode for Coder/Reviewer
-" >> CLAUDE.md
+EOF
 
 # 3. Start using
 # In Claude Code or other AI CLI:
