@@ -7,7 +7,8 @@ Validate artifact JSON files before state transitions.
 ## Prerequisite
 
 ```bash
-pip install jsonschema
+pip install -r requirements.txt
+# or: pip install jsonschema
 ```
 
 ## Validate One File

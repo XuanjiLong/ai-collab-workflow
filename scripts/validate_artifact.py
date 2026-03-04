@@ -16,7 +16,7 @@ import argparse
 import json
 from pathlib import Path
 import sys
-from typing import Any
+from typing import Any, Optional
 
 
 DEFAULT_EXAMPLE_PAIRS: list[tuple[str, str]] = [
@@ -87,8 +87,8 @@ def _strict_validate_task_contract(task_contract: dict[str, Any]) -> list[str]:
 
 def _strict_validate_review_result(
     *,
-    task_contract: dict[str, Any] | None,
-    coder_output: dict[str, Any] | None,
+    task_contract: Optional[dict[str, Any]],
+    coder_output: Optional[dict[str, Any]],
     review_result: dict[str, Any],
 ) -> list[str]:
     errs: list[str] = []
@@ -162,6 +162,11 @@ def _strict_validate_review_result(
     block_issues = review_result.get("block_issues")
     if isinstance(block_issues, list) and block_issues and verdict != "block":
         errs.append("review_result.verdict must be 'block' when block_issues is non-empty")
+    if verdict != "block":
+        if scorecard.get("constraint_compliance") == 0:
+            errs.append("review_result.verdict must be 'block' when scorecard.constraint_compliance == 0")
+        if scorecard.get("correctness") == 0:
+            errs.append("review_result.verdict must be 'block' when scorecard.correctness == 0")
     if isinstance(quality_score, int):
         if isinstance(block_threshold, int) and quality_score < block_threshold and verdict != "block":
             errs.append("review_result.verdict must be 'block' when quality_score < block_threshold")
@@ -197,7 +202,7 @@ def _strict_validate_review_result(
 
 def _strict_validate_decision_record(
     *,
-    review_result: dict[str, Any] | None,
+    review_result: Optional[dict[str, Any]],
     decision_record: dict[str, Any],
 ) -> list[str]:
     if review_result is None:

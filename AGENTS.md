@@ -74,9 +74,9 @@ Escalation path:
 ## Review Thresholds
 
 - `quality_score` is weighted by `review_rubric.active_weight_profile`.
-- `block`: any blocking issue or `quality_score < 60`.
-- `pass_with_suggestions`: no blockers and (`60 <= quality_score < 85` or advisory issues exist).
-- `pass`: no blockers, `quality_score >= 85`, and no follow-up-required advisory issues.
+- `block`: any blocking issue, or `scorecard.constraint_compliance == 0`, or `scorecard.correctness == 0`, or `quality_score < review_rubric.block_threshold`.
+- `pass`: no block conditions, `quality_score >= review_rubric.pass_threshold`, and no follow-up-required advisory issues.
+- `pass_with_suggestions`: otherwise (including when advisory issues exist even if `quality_score >= review_rubric.pass_threshold`).
 - `Main Agent` should record advisory follow-ups when verdict is `pass_with_suggestions`.
 
 ## Weight Profile Policy
@@ -93,7 +93,7 @@ Escalation path:
 - `auto_approve`:
   - reviewer verdict is `pass`
   - `risk_level == low`
-  - `quality_score >= 90`
+  - `quality_score >= approval_policy.auto_approve_min_quality_score`
   - no `block_issues`
 - `human_optional`:
   - reviewer verdict is `pass_with_suggestions`, or
@@ -134,17 +134,18 @@ When retry budget is exhausted, `Main Agent` must run these actions:
 
 ## Required Artifacts
 
-For each round, persist:
+Per round, persist:
 
-- `task_contract`
-- `coder_output`
-- `review_result`
-- `decision_record`
-- `decision_summary`
+- `coder_output.json`
+- `review_result.json`
+- `decision_record.json`
+- optional: `task_contract.json` (when the contract changes, for example on retry rounds)
+- optional: `decision_summary.md` (human-readable notes)
 
-For each finalized task (`closed` or `escalated_to_main`), persist:
+Per task, persist:
 
-- `metrics_snapshot`
+- `task_contract.initial.json`
+- `metrics_snapshot.json` on final state (`closed` or `escalated_to_main`)
 
 ## Document Index
 

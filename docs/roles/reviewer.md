@@ -95,18 +95,12 @@ Use weights from `TaskContract.review_rubric.active_weight_profile`.
 
 - `block` when any condition holds:
   - `block_issues` is not empty
-  - `constraint_compliance == 0`
-  - `correctness == 0`
-  - `risk_level == high`
-  - `quality_score < 60`
-- `pass_with_suggestions` when:
-  - No block conditions
-  - `60 <= quality_score < 85`, or
-  - At least one `advisory_issues` item or medium-risk optimization concern
-- `pass` when:
-  - No block conditions
-  - `quality_score >= 85`
-  - No advisory issues that require follow-up tracking
+  - `scorecard.constraint_compliance == 0`
+  - `scorecard.correctness == 0`
+  - `quality_score < task_contract.review_rubric.block_threshold`
+- Otherwise:
+  - `pass` when `quality_score >= task_contract.review_rubric.pass_threshold` and no follow-up-required advisory items exist
+  - `pass_with_suggestions` in all other cases (including when advisory follow-ups exist even if `quality_score >= task_contract.review_rubric.pass_threshold`)
 - Keep findings concrete and file-specific whenever possible.
 
 ### Advisory vs Suggestions Boundary
@@ -124,7 +118,7 @@ Use weights from `TaskContract.review_rubric.active_weight_profile`.
 - Recommend `auto_approve` when:
   - `verdict == pass`
   - `risk_level == low`
-  - `quality_score >= 90`
+  - `quality_score >= task_contract.approval_policy.auto_approve_min_quality_score`
   - no `block_issues`
 - Recommend `human_optional` when:
   - `verdict == pass_with_suggestions`, or

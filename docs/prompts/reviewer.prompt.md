@@ -20,12 +20,15 @@ Scoring rules (must be internally consistent):
 - `quality_score = round(sum(weighted_score_breakdown.*))` and must be `0..100` integer.
 
 Verdict rules (prefer deterministic behavior):
-- If `block_issues` is non-empty: `verdict` MUST be `block` (regardless of score).
+- If any condition holds, `verdict` MUST be `block`:
+  - `block_issues` is non-empty
+  - `scorecard.constraint_compliance == 0`
+  - `scorecard.correctness == 0`
+  - `quality_score < task_contract.review_rubric.block_threshold`
 - Otherwise:
-  - If `quality_score < task_contract.review_rubric.block_threshold`: `verdict` MUST be `block`.
-  - Else if `quality_score >= task_contract.review_rubric.pass_threshold`: `verdict` SHOULD be `pass` unless advisory follow-ups exist.
+  - If `quality_score >= task_contract.review_rubric.pass_threshold`: `verdict` SHOULD be `pass` unless advisory follow-ups exist.
   - Else: `verdict` SHOULD be `pass_with_suggestions`.
-- If `advisory_issues` or `suggestions` is non-empty, `pass_with_suggestions` is acceptable even when `quality_score >= pass_threshold`.
+- If `advisory_issues` or `suggestions` is non-empty, `pass_with_suggestions` is acceptable even when `quality_score >= task_contract.review_rubric.pass_threshold`.
 
 Alignment rules:
 - `alignment.coder_self_review_delta.quality_score_diff = quality_score - coder_output.self_review.quality_score_estimate`

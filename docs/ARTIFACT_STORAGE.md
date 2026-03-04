@@ -36,6 +36,12 @@ Per task:
 - `task_contract.initial.json`
 - `metrics_snapshot.json` on final state
 
+## Optional Artifacts
+
+Per round:
+- `task_contract.json` when the contract changes (for example to attach a retry `rework` packet)
+- `decision_summary.md` for human-readable notes and follow-ups
+
 ## Optional Index File
 
 You may add `.workflow/tasks/<task_id>/index.json` to track:

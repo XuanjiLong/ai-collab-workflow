@@ -290,9 +290,9 @@ When `retry_count > 0`, `TaskContract` should include a `rework` object:
 
 ### Verdict Semantics
 
-- `pass`: merge-ready, no required follow-up, usually `quality_score >= 85`.
-- `pass_with_suggestions`: merge-ready with non-blocking improvements tracked, usually `60 <= quality_score < 85`.
-- `block`: not merge-ready, must rework before approval, or `quality_score < 60`.
+- `pass`: merge-ready, no required follow-up, usually `quality_score >= task_contract.review_rubric.pass_threshold`.
+- `pass_with_suggestions`: merge-ready with non-blocking improvements tracked, usually `task_contract.review_rubric.block_threshold <= quality_score < task_contract.review_rubric.pass_threshold`.
+- `block`: not merge-ready, must rework before approval, or `quality_score < task_contract.review_rubric.block_threshold`.
 
 ### Weighted Score Formula
 
