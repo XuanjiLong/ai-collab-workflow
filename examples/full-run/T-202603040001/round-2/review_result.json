@@ -1,0 +1,45 @@
+{
+  "task_id": "T-202603040001",
+  "review_id": "R-T-202603040001-2",
+  "verdict": "pass_with_suggestions",
+  "summary": "Blocking issue resolved. Merge is acceptable with follow-up testing improvements.",
+  "quality_score": 95,
+  "weight_profile_used": "new_feature",
+  "weighted_score_breakdown": {
+    "goal_coverage": 30.0,
+    "constraint_compliance": 20.0,
+    "correctness": 25.0,
+    "regression_risk": 15.0,
+    "test_confidence": 5.0
+  },
+  "risk_level": "low",
+  "scorecard": {
+    "goal_coverage": 2,
+    "constraint_compliance": 2,
+    "correctness": 2,
+    "regression_risk": 2,
+    "test_confidence": 1
+  },
+  "block_issues": [],
+  "advisory_issues": [
+    {
+      "id": "A1",
+      "title": "Add integration test for idempotency behavior across retries",
+      "severity": "low",
+      "file": "tests/order_service.test.ts",
+      "line": 1,
+      "expected": "Cover multi-request sequence with same idempotency key"
+    }
+  ],
+  "suggestions": [
+    "Consider moving idempotency response builder to shared error utility for consistency"
+  ],
+  "recommended_decision_mode": "human_optional",
+  "alignment": {
+    "coder_self_review_delta": {
+      "quality_score_diff": 6,
+      "correctness_diff": 0
+    },
+    "definition_mismatch": []
+  }
+}

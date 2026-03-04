@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/metrics_snapshot.schema.json",
+  "type": "object",
+  "required": [
+    "task_id",
+    "work_type",
+    "final_status",
+    "round_count",
+    "quality_score_mae",
+    "risk_level_match_rate",
+    "definition_mismatch_count",
+    "top_definition_mismatch_tags",
+    "created_at"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "task_id": {"type": "string"},
+    "work_type": {"type": "string", "enum": ["new_feature", "refactor", "bugfix", "other"]},
+    "final_status": {"type": "string", "enum": ["closed", "escalated_to_main"]},
+    "round_count": {"type": "integer", "minimum": 1},
+    "quality_score_mae": {"type": "number", "minimum": 0},
+    "risk_level_match_rate": {"type": "number", "minimum": 0, "maximum": 1},
+    "definition_mismatch_count": {"type": "integer", "minimum": 0},
+    "top_definition_mismatch_tags": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "created_at": {"type": "string", "format": "date-time"}
+  }
+}

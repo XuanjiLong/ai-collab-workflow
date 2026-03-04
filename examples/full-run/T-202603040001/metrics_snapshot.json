@@ -1,0 +1,11 @@
+{
+  "task_id": "T-202603040001",
+  "work_type": "new_feature",
+  "final_status": "closed",
+  "round_count": 2,
+  "quality_score_mae": 6.5,
+  "risk_level_match_rate": 0.5,
+  "definition_mismatch_count": 1,
+  "top_definition_mismatch_tags": ["conflict_payload_required"],
+  "created_at": "2026-03-04T10:22:00Z"
+}

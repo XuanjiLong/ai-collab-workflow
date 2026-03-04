@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/coder_output.schema.json",
+  "type": "object",
+  "required": ["patch", "change_summary", "self_test", "self_review"],
+  "additionalProperties": false,
+  "properties": {
+    "patch": {"type": "string", "minLength": 1},
+    "change_summary": {"type": "string", "minLength": 1},
+    "self_test": {
+      "type": "object",
+      "required": ["unit_test_passed", "notes"],
+      "additionalProperties": false,
+      "properties": {
+        "unit_test_passed": {"type": "boolean"},
+        "notes": {"type": "string"}
+      }
+    },
+    "self_review": {
+      "type": "object",
+      "required": [
+        "quality_score_estimate",
+        "weight_profile_used",
+        "risk_level_estimate",
+        "scorecard_estimate",
+        "addressed_block_issue_ids",
+        "known_gaps"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "quality_score_estimate": {"type": "integer", "minimum": 0, "maximum": 100},
+        "weight_profile_used": {
+          "type": "string",
+          "enum": ["new_feature", "refactor", "bugfix", "balanced"]
+        },
+        "risk_level_estimate": {"type": "string", "enum": ["low", "medium", "high"]},
+        "scorecard_estimate": {
+          "type": "object",
+          "required": [
+            "goal_coverage",
+            "constraint_compliance",
+            "correctness",
+            "regression_risk",
+            "test_confidence"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "goal_coverage": {"type": "integer", "minimum": 0, "maximum": 2},
+            "constraint_compliance": {"type": "integer", "minimum": 0, "maximum": 2},
+            "correctness": {"type": "integer", "minimum": 0, "maximum": 2},
+            "regression_risk": {"type": "integer", "minimum": 0, "maximum": 2},
+            "test_confidence": {"type": "integer", "minimum": 0, "maximum": 2}
+          }
+        },
+        "addressed_block_issue_ids": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "known_gaps": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      }
+    }
+  }
+}

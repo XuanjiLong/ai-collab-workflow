@@ -1,0 +1,102 @@
+{
+  "task_id": "T-202603040001",
+  "type": "code_change",
+  "work_type": "new_feature",
+  "goal": "Add idempotency checks to order API",
+  "context": {
+    "repo": "demo-repo",
+    "files_hint": ["src/api/order.ts", "src/service/order_service.ts"]
+  },
+  "constraints": [
+    "Do not change DB schema",
+    "Keep backward-compatible response"
+  ],
+  "review_rubric": {
+    "version": "v1",
+    "dimensions": [
+      "goal_coverage",
+      "constraint_compliance",
+      "correctness",
+      "regression_risk",
+      "test_confidence"
+    ],
+    "weight_profiles": {
+      "new_feature": {
+        "goal_coverage": 0.3,
+        "constraint_compliance": 0.2,
+        "correctness": 0.25,
+        "regression_risk": 0.15,
+        "test_confidence": 0.1
+      },
+      "refactor": {
+        "goal_coverage": 0.15,
+        "constraint_compliance": 0.2,
+        "correctness": 0.25,
+        "regression_risk": 0.3,
+        "test_confidence": 0.1
+      },
+      "bugfix": {
+        "goal_coverage": 0.2,
+        "constraint_compliance": 0.2,
+        "correctness": 0.35,
+        "regression_risk": 0.15,
+        "test_confidence": 0.1
+      },
+      "balanced": {
+        "goal_coverage": 0.2,
+        "constraint_compliance": 0.2,
+        "correctness": 0.25,
+        "regression_risk": 0.25,
+        "test_confidence": 0.1
+      }
+    },
+    "weight_profile_by_work_type": {
+      "new_feature": "new_feature",
+      "refactor": "refactor",
+      "bugfix": "bugfix",
+      "other": "balanced"
+    },
+    "active_weight_profile": "new_feature",
+    "scoring_scale": "0..2",
+    "block_threshold": 60,
+    "pass_threshold": 85,
+    "correctness_definition": [
+      "Behavior matches goal and acceptance criteria",
+      "No required constraint is violated",
+      "Error handling/status code semantics are preserved"
+    ]
+  },
+  "approval_policy": {
+    "mode": "risk_based",
+    "auto_approve_min_quality_score": 90,
+    "human_optional_sla_seconds": 900,
+    "human_required_max_wait_seconds": 1800
+  },
+  "retry_policy": {
+    "strategy": "adaptive_by_complexity",
+    "complexity_level": "medium",
+    "complexity_score": 3,
+    "max_rework_rounds": 2,
+    "override_reason": null,
+    "escalation_owner": "tech_lead",
+    "allowed_escalation_actions": [
+      "split_task",
+      "adjust_constraints",
+      "change_owner",
+      "extend_retry_budget"
+    ]
+  },
+  "output_schema": {
+    "required": ["patch", "change_summary", "self_test", "self_review"]
+  },
+  "done_criteria": [
+    "unit_test_passed",
+    "block_issue_count == 0",
+    "required_artifacts_present"
+  ],
+  "owner_agent": "coder",
+  "status": "assigned",
+  "deadline": null,
+  "retry_count": 0,
+  "rework": null
+}

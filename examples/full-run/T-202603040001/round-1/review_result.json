@@ -1,0 +1,45 @@
+{
+  "task_id": "T-202603040001",
+  "review_id": "R-T-202603040001-1",
+  "verdict": "block",
+  "summary": "Conflict response is missing required 409 unified payload.",
+  "quality_score": 75,
+  "weight_profile_used": "new_feature",
+  "weighted_score_breakdown": {
+    "goal_coverage": 30.0,
+    "constraint_compliance": 20.0,
+    "correctness": 12.5,
+    "regression_risk": 7.5,
+    "test_confidence": 5.0
+  },
+  "risk_level": "high",
+  "scorecard": {
+    "goal_coverage": 2,
+    "constraint_compliance": 2,
+    "correctness": 1,
+    "regression_risk": 1,
+    "test_confidence": 1
+  },
+  "block_issues": [
+    {
+      "id": "B1",
+      "title": "Missing standardized 409 conflict response",
+      "severity": "high",
+      "file": "src/service/order_service.ts",
+      "line": 1,
+      "expected": "Return 409 with unified error payload for duplicate request"
+    }
+  ],
+  "advisory_issues": [],
+  "suggestions": ["Add integration test for duplicate idempotency key path"],
+  "recommended_decision_mode": "human_required",
+  "alignment": {
+    "coder_self_review_delta": {
+      "quality_score_diff": -7,
+      "correctness_diff": 0
+    },
+    "definition_mismatch": [
+      "Coder treated unified conflict payload as optional while rubric marks it required"
+    ]
+  }
+}

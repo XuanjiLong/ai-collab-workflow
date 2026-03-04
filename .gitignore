@@ -1,0 +1,11 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Test/runtime artifacts
+.pytest_cache/
+*.db
+.workflow/
+
+# IDE
+.vscode/
